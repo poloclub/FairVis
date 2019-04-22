@@ -1,0 +1,35 @@
+.App {
+    margin: 0px auto;
+}
+
+.main {
+    margin-left: 250px;
+}
+
+li svg.box-plot {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* z-index: -1; */
+}
+
+.tooltip {
+    width: 100%;
+    pointer-events: none;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+h4 {
+    margin: 0;
+    padding: 0;
+}

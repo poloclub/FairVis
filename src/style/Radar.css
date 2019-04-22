@@ -1,0 +1,11 @@
+/* first child will be clicked */
+#radar-wrapper path:nth-child(1) {
+    fill: #e57373 !important;
+    stroke: #e57373 !important;   
+}
+
+/* second child will be hovered */
+#radar-wrapper path:nth-child(2) {
+    fill: #64b5f6 !important;
+    stroke: #64b5f6 !important;
+}

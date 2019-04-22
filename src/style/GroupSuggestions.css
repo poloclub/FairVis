@@ -1,0 +1,23 @@
+.suggested-card {
+    width: 315px;
+    margin-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    overflow: scroll;
+}
+
+.suggested-card:hover {
+    background: #f7f7f7;
+}
+
+.similar-card {
+    width: 350px;
+    margin-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    overflow: scroll;
+}
+
+.similar-card:hover {
+    background: #f7f7f7;
+}

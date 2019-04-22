@@ -1,0 +1,50 @@
+/* Styles for StripPlot */
+
+.y.axis line {
+    fill: none;
+    stroke: #d6d6d6;
+    shape-rendering: crispEdges;
+    stroke-width: 1px;
+}
+
+.x.axis line {
+    display: none;
+}
+
+.tick.g-baseline line {
+    stroke: #d6d6d6;
+    stroke-dasharray: 0;
+    stroke-width: 2px;
+}
+
+.axis text {
+    font-size: 12px;
+    pointer-events: none;
+    fill: #a6a6a6;
+}
+
+text.axis-label {
+    text-anchor: start !important;
+    font-size: 16px;
+    fill: #a6a6a6;
+}
+
+.domain {
+    /* display: none; */
+    color: #e6e6e6;
+}
+
+.percentline {
+    stroke: #1D2737;
+    stroke-width: 5;
+    opacity: .6;
+}
+
+.percentline.linehover {
+    stroke: #2979ff;
+}
+
+.percentline.lineclick {
+    stroke: #b71c1c;
+    stroke-width: 7;
+}

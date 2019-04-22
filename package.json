@@ -1,0 +1,35 @@
+{
+  "name": "subgroup-fairness",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/lab": "^3.0.0-alpha.30",
+    "d3": "^5.9.1",
+    "d3-tip": "^0.9.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.5",
+    "react-scripts": "^2.1.8",
+    "react-select": "^2.4.2",
+    "react-vega-lite": "^2.0.2",
+    "typescript": "^3.4.4",
+    "vega-lib": "^4.4.0",
+    "vega-lite": "^2.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
