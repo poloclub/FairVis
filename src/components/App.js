@@ -1,27 +1,21 @@
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import {
-  createMuiTheme,
-  MuiThemeProvider,
-  withStyles
-} from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider, withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/lab/Slider";
 import * as d3 from "d3";
 import React, { Component } from "react";
-import data_output_and_clusters from "../data/compas_high_class_cluster.csv";
-// import data_output_and_clusters from "../data/adult_out_with_clusters.csv";
+import Paper from "@material-ui/core/Paper";
+import TableBody from "@material-ui/core/TableBody";
+import Table from "@material-ui/core/Table";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import "../style/App.css";
 import { getClusters } from "../util/clusterDescriptions";
 import { createSubgroups } from "../util/generateSubgroups";
-import {
-  METRICS,
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  TERTIARY_COLOR
-} from "../util/globals";
+import { METRICS, PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../util/globals";
 import worker from "../workers/dataLoader.js";
 import WebWorker from "../workers/WebWorker";
 import ExpandedCard from "./ExpandedCard";
@@ -29,6 +23,11 @@ import FeatureDrawer from "./FeatureDrawer";
 import GroupSuggestions from "./GroupSuggestions";
 import MetricSelector from "./MetricSelector";
 import StripPlot from "./StripPlot";
+
+/* Datasets */
+import compasData from "../data/compas.csv";
+import adultData from "../data/adult.csv";
+import censusData from "../data/census.csv";
 
 const theme = createMuiTheme({
   palette: {
@@ -77,13 +76,16 @@ const styles = {
   reset: {
     float: "right"
   },
-  title: {
-    flexGrow: 1
-  },
   subtitle: {
     flexGrow: 1,
     color: TERTIARY_COLOR,
     textAlign: "center"
+  },
+  tagline: {
+    flexGrow: 1,
+    marginLeft: 30,
+    color: TERTIARY_COLOR,
+    textAlign: "left"
   },
   loadingScreen: {
     minWidth: "100%",
@@ -102,12 +104,34 @@ const styles = {
     marginLeft: "auto",
     marginRight: "auto",
     color: "white"
+  },
+  datasets: {
+    width: "600px",
+    margin: "0px auto",
+    marginTop: 10
+  },
+  tabletitle: {
+    marginTop: 50,
+    color: "white",
+    textAlign: "center"
+  },
+  title: {
+    fontWeight: 800
+  },
+  adddata: {
+    color: "white",
+    textAlign: "center"
+  },
+  dataLink: {
+    textDecorationColor: "black",
+    color: "black"
   }
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
+    document.title = "FairVis - Audit Classification for Intersectional Bias";
 
     /**
      * Every subgroup in the activeGroups array should have the following form:
@@ -148,7 +172,9 @@ class App extends Component {
       dataLoaded: false,
       clustersLoaded: false
     };
+  }
 
+  loadData = data => {
     // WebWorker to run preprocessing in parallel.
     let loaderWorker = new WebWorker(worker);
 
@@ -166,7 +192,7 @@ class App extends Component {
         clustersLoaded: true
       });
     });
-    d3.csv(data_output_and_clusters).then(d => loaderWorker.postMessage(d));
+    d3.csv(data).then(d => loaderWorker.postMessage(d));
   }
 
   createSubgroups = groups => {
@@ -328,16 +354,72 @@ class App extends Component {
           >
             <strong>FairVis</strong>{" "}
           </Typography>
-
           <Typography variant="h6" className={classes.subtitle}>
-            Audit Classification for Intersectional Bias
+            Audit Classification Models for Intersectional Bias
           </Typography>
+          <Typography variant="h6" className={classes.tabletitle}>
+            Select a Dataset
+          </Typography>
+          <Paper className={classes.datasets}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Dataset</TableCell>
+                  <TableCell>Goal</TableCell>
+                  <TableCell>Size</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    <a className={classes.dataLink} href="https://archive.ics.uci.edu/ml/datasets/Adult">UCI Adult</a>
+                  </TableCell>
+                  <TableCell>Predict income >$50K</TableCell>
+                  <TableCell>32,562</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={_ => this.loadData(adultData)}
+                    >Select</Button></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    <a className={classes.dataLink} href="https://github.com/propublica/compas-analysis/">COMPAS</a>
+                  </TableCell>
+                  <TableCell>Predict recidivism</TableCell>
+                  <TableCell>6,173</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={_ => this.loadData(compasData)}
+                    >Select</Button></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    <a className={classes.dataLink} href="https://archive.ics.uci.edu/ml/datasets/Census-Income+%28KDD%29">UCI Census-Income</a>
+                  </TableCell>
+                  <TableCell>Predict income >$50K</TableCell>
+                  <TableCell>199,523</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={_ => this.loadData(censusData)}
+                    >Select</Button></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Paper>
+          <a href="./" className={classes.adddata}><p>Instructions for adding a custom dataset</p></a>
 
-          <h3 className={classes.loadingText}>Loading data</h3>
+          {/* <h3 className={classes.loadingText}>Loading data</h3>
           <CircularProgress
             color="primary"
             className={classes.loadingProgress}
-          />
+          /> */}
         </div>
       );
     }
@@ -351,12 +433,11 @@ class App extends Component {
               variant="h4"
               color="inherit"
               className={classes.title}
-            >
-              <strong>FairVis</strong>{" "}
-              <Typography inline variant="h6" className={classes.subtitle}>
-                {" "}
-                Audit Classification for Intersectional Bias{" "}
-              </Typography>
+            >FairVis
+            </Typography>
+            <Typography inline variant="h6" className={classes.tagline}>
+              {" "}
+              Audit Classification for Intersectional Bias{" "}
             </Typography>
             <Typography variant="body1" color="inherit">
               Minimum Size: {this.state.minSize}
