@@ -13,7 +13,7 @@ import "../style/Radar.css";
 import MetricsDistribution from "./MetricsDistribution";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import { HOVERED_COLOR, CLICKED_COLOR} from "../util/globals";
+import { HOVERED_COLOR, CLICKED_COLOR } from "../util/globals";
 
 const styles = {
   card: {
@@ -53,6 +53,12 @@ const styles = {
   },
   selectedGroups: {
     marginTop: 8
+  },
+  feats: {
+    paddingLeft: 8
+  },
+  hoveredCell: {
+    paddingRight: 8
   }
 };
 
@@ -118,7 +124,7 @@ class ExpandedCard extends Component {
       }
       if (this.props.hovered !== -1 && hoveredGroup.feats.includes(feat)) {
         hoveredCell = (
-          <TableCell align={"right"}>
+          <TableCell align={"right"} className={classes.hoveredCell}>
             {hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}
           </TableCell>
         );
@@ -127,7 +133,7 @@ class ExpandedCard extends Component {
       return (
         <>
           <TableRow key={i}>
-            <TableCell>{feat}</TableCell>
+            <TableCell className={classes.feat}>{feat}</TableCell>
             {clickedCell}
             {hoveredCell}
           </TableRow>
@@ -160,7 +166,7 @@ class ExpandedCard extends Component {
             clickedGroup={clickedGroup}
           />
           <Paper className={classes.feats}>
-            <Table className={classes.table} padding="dense">
+            <Table className={classes.table} padding="none" size="small">
               <colgroup>
                 <col style={{ width: "33%" }} />
                 <col style={{ width: "33%" }} />
@@ -168,11 +174,11 @@ class ExpandedCard extends Component {
               </colgroup>
               <TableHead className={classes.tableHeader}>
                 <TableRow key={0}>
-                  <TableCell>Feature</TableCell>
+                  <TableCell className={classes.feat}>Feature</TableCell>
                   <TableCell align="right">
                     <span className={classes.clicked}>Pinned</span>
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="right" className={classes.hoveredCell}>
                     <span className={classes.hovered}>Hovered</span>
                   </TableCell>
                 </TableRow>

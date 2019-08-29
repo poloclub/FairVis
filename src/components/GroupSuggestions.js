@@ -15,10 +15,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import {
-  CLICKED_COLOR,
-  METRICS
-} from "../util/globals";
+import { CLICKED_COLOR, METRICS } from "../util/globals";
 import { getNeighbors } from "../util/neighboringClusters";
 import { TableHead } from "@material-ui/core";
 import "../style/GroupSuggestions.css";
@@ -46,7 +43,7 @@ const styles = {
   cards: {
     display: "flex",
     flexDirection: "inline",
-    justifyItems: "center"
+    justifyContent: "center"
   },
   cardContent: {
     padding: 0
@@ -109,8 +106,6 @@ class GroupSuggestions extends Component {
     };
   }
   shouldComponentUpdate(nextProps) {
-    if (nextProps.clicked !== this.props.clicked) {
-    }
     if (nextProps.clustersLoaded) {
       return true;
     }
@@ -130,7 +125,7 @@ class GroupSuggestions extends Component {
   };
 
   pageRight = () => {
-    if (this.state.page * 3 + 4 < this.props.clusters.length) {
+    if (this.state.page * 2 + 3 < this.props.clusters.length) {
       this.setState({
         page: this.state.page + 1
       });
@@ -176,7 +171,7 @@ class GroupSuggestions extends Component {
   render() {
     let classes = this.props.classes;
 
-    if (this.state.showSimilar && this.state.neighbors.length !== 0) {
+    if (this.state.showSimilar && this.state.neighbors.length !== 0 && this.props.clicked !== -1) {
       let clickedGroup = this.props.activeGroups[this.props.clicked];
       let similarGroups = this.state.neighbors
         .sort((a, b) => {
@@ -196,7 +191,7 @@ class GroupSuggestions extends Component {
                   <TableBody>
                     <TableRow>
                       <TableCell>
-                        <b> Group {this.state.page * 3 + index + 1} </b>
+                        <b> Group {this.state.page * 2 + index + 1} </b>
                         <br />
                         {neigh.type === "top" ? "Generated" : "Suggested"}
                       </TableCell>
@@ -211,14 +206,16 @@ class GroupSuggestions extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>Feature Difference</TableCell>
-                      <TableCell style={{ color: CLICKED_COLOR }} align="right">Pinned</TableCell>
-                      <TableCell style={{ color: "#718C73" }} align="right">Similar</TableCell>
+                      <TableCell style={{ color: CLICKED_COLOR }} align="right">
+                        Pinned
+                      </TableCell>
+                      <TableCell style={{ color: "#718C73" }} align="right">
+                        Similar
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableCell>
-                      {clickedGroup.feats[neigh.featDiff]}
-                    </TableCell>
+                    <TableCell>{clickedGroup.feats[neigh.featDiff]}</TableCell>
                     <TableCell align="right">
                       {clickedGroup.vals[neigh.featDiff]}
                     </TableCell>
@@ -271,11 +268,11 @@ class GroupSuggestions extends Component {
         .sort((a, b) => {
           return a.metrics[this.state.sort] - b.metrics[this.state.sort];
         })
-        .slice(this.state.page * 3, this.state.page * 3 + 3);
+        .slice(this.state.page * 2, this.state.page * 2 + 2);
 
       let cards = bottomClusters.map((clust, index) => (
         <Card
-          className={ "suggested-card"}
+          className={"suggested-card"}
           key={index}
           onMouseEnter={_ => this.mouseEnter(clust)}
           onMouseLeave={_ => this.mouseLeave(clust)}
@@ -286,7 +283,7 @@ class GroupSuggestions extends Component {
               <TableBody>
                 <TableRow>
                   <TableCell padding="none" className={classes.leftCell}>
-                    <b>Group {this.state.page * 3 + index + 1}</b>
+                    <b>Group {this.state.page * 2 + index + 1}</b>
                   </TableCell>
                   <TableCell width={80} padding="dense" align="right">
                     {clust.metrics.size} Instances
@@ -299,8 +296,18 @@ class GroupSuggestions extends Component {
                       <br />
                       <span className={classes.value}>{clust.vals[i]}</span>
                     </TableCell>
-                    <TableCell padding="none" className={classes.cell} align="right">
-                      <ClusterDistribution maxVal={clust.vals[i]} features={this.props.features} values={this.props.values} cluster={clust} feature={feat} />
+                    <TableCell
+                      padding="none"
+                      className={classes.cell}
+                      align="right"
+                    >
+                      <ClusterDistribution
+                        maxVal={clust.vals[i]}
+                        features={this.props.features}
+                        values={this.props.values}
+                        cluster={clust}
+                        feature={feat}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -333,10 +340,10 @@ class GroupSuggestions extends Component {
               <div className={classes.paging}>
                 <ChevronLeft onClick={this.pageLeft} />
                 <Typography variant="body1">
-                  {this.state.page * 3 + 1} -{" "}
-                  {this.state.page * 3 + 3 > this.props.clusters.length
+                  {this.state.page * 2 + 1} -{" "}
+                  {this.state.page * 2 + 2 > this.props.clusters.length
                     ? this.props.clusters.length
-                    : this.state.page * 3 + 3}
+                    : this.state.page * 2 + 2}
                 </Typography>
                 <ChevronRight onClick={this.pageRight} />
               </div>

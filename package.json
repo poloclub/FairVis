@@ -11,6 +11,7 @@
     "d3-tip": "^0.9.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.5",
+    "react-icons": "^3.7.0",
     "react-scripts": "^3.1.1",
     "react-select": "^2.4.2",
     "react-vega-lite": "^2.0.2",

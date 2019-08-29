@@ -3,7 +3,7 @@ import VegaLite from "react-vega-lite";
 
 const spec = {
   $schema: "https://vega.github.io/schema/vega-lite/v3.json",
-  mark: "bar",
+  mark: { type: "bar", tooltip: true },
   width: 250,
   transform: [
     {

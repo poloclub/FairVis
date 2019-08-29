@@ -7,7 +7,7 @@ import { TERTIARY_COLOR } from "../util/globals";
 const boxWidth = 300;
 const boxHeight = 100;
 
-class BoxPlot extends Component {
+class Histogram extends Component {
   constructor(props) {
     super(props);
 
@@ -201,4 +201,4 @@ class BoxPlot extends Component {
   }
 }
 
-export default BoxPlot;
+export default Histogram;

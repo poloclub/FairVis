@@ -11,10 +11,17 @@ import { withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import * as d3 from "d3";
 import React, { Component } from "react";
-import BoxPlot from "./BoxPlot";
-import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../util/globals";
+import Histogram from "./Histogram";
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TERTIARY_COLOR
+} from "../util/globals";
+
+import { FaInfoCircle } from "react-icons/fa";
 
 const styles = {
+  info: {},
   drawer: {
     width: "20%",
     flexShrink: 0,
@@ -47,6 +54,10 @@ const styles = {
     color: PRIMARY_COLOR,
     fontWeight: 500,
     margin: 0
+  },
+  info: {
+    color: PRIMARY_COLOR,
+    cursor: "pointer"
   }
 };
 
@@ -55,12 +66,14 @@ class FeatureDrawer extends Component {
     super(props);
 
     let sub = {};
-    let max_ys = []
+    let max_ys = [];
 
     props.features.forEach((feat_name, feat_i) => {
       sub[feat_i] = new Set();
-      let maxy = d3.max(props.dataDistrib[feat_i], d => {return d[1]})
-      max_ys.push(maxy)
+      let maxy = d3.max(props.dataDistrib[feat_i], d => {
+        return d[1];
+      });
+      max_ys.push(maxy);
     });
 
     this.state = {
@@ -73,9 +86,10 @@ class FeatureDrawer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if ( (this.props.features.length === 0 && nextProps.features.length > 0) ||
-      (this.props.clicked !== nextProps.clicked) ||
-      (this.props.hovered !== nextProps.hovered) ||
+    if (
+      (this.props.features.length === 0 && nextProps.features.length > 0) ||
+      this.props.clicked !== nextProps.clicked ||
+      this.props.hovered !== nextProps.hovered ||
       this.compareState(this.state, nextState)
     ) {
       return true;
@@ -206,7 +220,10 @@ class FeatureDrawer extends Component {
 
   render() {
     const classes = this.props.classes;
-    const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
 
     if (this.props.features.length > 0) {
       return (
@@ -231,6 +248,7 @@ class FeatureDrawer extends Component {
                   Generate Subgroups
                 </Button>
               </Tooltip>
+              <FaInfoCircle className={classes.info} onClick={() => alert("hello")}/>
             </ListItem>
             <Divider />
 
@@ -243,12 +261,12 @@ class FeatureDrawer extends Component {
                 >
                   <p className={classes.boxLabel}>{feat_name}</p>
                   {/* Global BoxPlot */}
-                  <BoxPlot
+                  <Histogram
                     featName={feat_name}
                     dataDistrib={this.props.dataDistrib}
                     featIndex={feat_i}
                     type={"global"}
-                    maxy= {this.state.max_ys[feat_i]}
+                    maxy={this.state.max_ys[feat_i]}
                   />
                   {/* Clicked BoxPlot */}
                   {/* <BoxPlot
@@ -261,14 +279,14 @@ class FeatureDrawer extends Component {
                     maxy= {this.state.max_ys[feat_i]}
                   /> */}
                   {/* Hovered BoxPlot */}
-                  <BoxPlot
+                  <Histogram
                     featName={feat_name}
                     featIndex={feat_i}
                     clicked={this.props.clicked}
                     hovered={this.props.hovered}
                     activeGroups={this.props.activeGroups}
                     type={"hover"}
-                    maxy= {this.state.max_ys[feat_i]}
+                    maxy={this.state.max_ys[feat_i]}
                   />
 
                   <ListItemSecondaryAction className={classes.radio}>
@@ -285,23 +303,25 @@ class FeatureDrawer extends Component {
                   timeout="auto"
                   unmountOnExit
                 >
-                  {this.props.values[feat_i].sort(collator.compare).map((value, value_i) => (
-                    <ListItem
-                      key={`item-${feat_i}-${value_i}`}
-                      button
-                      onMouseOver={e => this.handleHover(feat_i, value_i, e)}
-                      onMouseOut={e => this.handleUnhover(feat_i, value_i, e)}
-                    >
-                      <ListItemText primary={value} />
+                  {this.props.values[feat_i]
+                    .sort(collator.compare)
+                    .map((value, value_i) => (
+                      <ListItem
+                        key={`item-${feat_i}-${value_i}`}
+                        button
+                        onMouseOver={e => this.handleHover(feat_i, value_i, e)}
+                        onMouseOut={e => this.handleUnhover(feat_i, value_i, e)}
+                      >
+                        <ListItemText primary={value} />
 
-                      <ListItemSecondaryAction>
-                        <Checkbox
-                          onChange={this.handleSubToggle(feat_i, value_i)}
-                          checked={this.state.subchecked[feat_i].has(value_i)}
-                        />
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
+                        <ListItemSecondaryAction>
+                          <Checkbox
+                            onChange={this.handleSubToggle(feat_i, value_i)}
+                            checked={this.state.subchecked[feat_i].has(value_i)}
+                          />
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    ))}
                 </Collapse>
                 <Divider className={classes.divider} />
               </>

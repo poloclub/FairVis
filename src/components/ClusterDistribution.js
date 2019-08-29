@@ -15,7 +15,7 @@ const spec = {
       as: "percent"
     }
   ],
-  mark: "bar",
+  mark: {type: "bar", tooltip: true},
   encoding: {
     y: {
       field: "value",

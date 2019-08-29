@@ -19,12 +19,12 @@ const spec = {
       type: "ordinal",
       scale: { padding: 4 },
       axis: { title: "", orient: "top", axisWidth: 1, offset: -8 },
-      header: { titleFontSize: 20, labelFontSize: 12,  labelAngle: 0 }
+      header: {title: ""},
     },
     y: {
       field: "group",
       type: "ordinal",
-      axis: { title: "", labels: false },
+      axis: { title: "", labels: false }
     },
     x: {
       field: "percent",
@@ -34,6 +34,10 @@ const spec = {
       },
       axis: { title: "", format: "%" }
     },
+    tooltip: {
+      field: "percent",
+      type: "quantitative"
+    },
     color: {
       field: "group",
       type: "nominal",
@@ -42,7 +46,7 @@ const spec = {
         // range: [HOVERED_COLOR, CLICKED_COLOR]
         range: ["#64b5f6", "#e57373"]
       },
-      legend: { title: "" }
+      legend: null
     }
   }
 };
@@ -56,7 +60,7 @@ class MetricsDistribution extends Component {
           return {
             group: "hovered",
             metric: m.label,
-            value: this.props.hoveredGroup.metrics[m.value],
+            value: this.props.hoveredGroup.metrics[m.value]
           };
         })
       );
@@ -72,9 +76,7 @@ class MetricsDistribution extends Component {
         })
       );
     }
-    return (
-      <VegaLite data={{ values: data }} spec={spec} />
-    );
+    return <VegaLite data={{ values: data }} spec={spec} />;
   }
 }
 

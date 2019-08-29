@@ -85,23 +85,23 @@ export default () => {
   /** Calculate distribution over instances */
   function calcValueDist(insts, allFeatures, allValues) {
     // init dist
-    let dist = {}
-    allFeatures.forEach((f, i) => { 
+    let dist = {};
+    allFeatures.forEach((f, i) => {
       let thisVals = allValues[i];
-      let v_dist = {}
+      let v_dist = {};
       thisVals.forEach((v, i) => {
         v_dist[v] = 0;
       });
       dist[f] = v_dist;
     });
-  
+
     // populate dist
     insts.forEach((item, i) => {
       Object.entries(item).forEach(tuple => {
         // tuple = ["age", 17]
-        dist[tuple[0]][tuple[1]] += 1
-      })
-    })
+        dist[tuple[0]][tuple[1]] += 1;
+      });
+    });
 
     return dist;
   }
@@ -126,15 +126,18 @@ export default () => {
 
     // calculate global feat distribution
     let distrib = calcValueDist(data, out.feats, out.vals);
-    let distrib_arr = []
+    let distrib_arr = [];
 
-    let collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+    let collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
 
     out.feats.forEach(feat_name => {
       let r = Object.entries(distrib[feat_name]);
-      r.sort((a,b) => (collator.compare(a[0], b[0])));
-      distrib_arr.push(r)
-    })
+      r.sort((a, b) => collator.compare(a[0], b[0]));
+      distrib_arr.push(r);
+    });
 
     out.distrib = distrib_arr;
 

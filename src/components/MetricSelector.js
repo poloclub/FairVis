@@ -15,7 +15,7 @@ const styles = theme => ({
     minWidth: 250,
     color: "white",
     marginRight: 20,
-    marginTop: 10,
+    marginTop: 10
   },
   input: {
     display: "flex",
@@ -166,12 +166,12 @@ const components = {
 };
 
 class MetricSelector extends Component {
-  handleChange = (values) => {
-    this.props.onMetricChange(values)
-  }
+  handleChange = values => {
+    this.props.onMetricChange(values);
+  };
 
   render() {
-    // these have to be defined out here or it breaks...idk man 
+    // these have to be defined out here or it breaks...idk man
     var selectedOptions = this.props.selectedMetrics;
     var suggs = this.props.suggestions;
 

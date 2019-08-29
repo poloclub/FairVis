@@ -1,54 +1,16 @@
 import { calculateFairnessMetrics } from "../util/generateSubgroups";
-// import skmeans from 'skmeans';
 
 function shannonEntropy(arr, size) {
   let s = 0;
   Object.keys(arr).forEach(k => {
     arr[k] = arr[k] / size;
-    let v = arr[k]
+    let v = arr[k];
     if (v !== 0) {
-      s += v * Math.log2(v)
+      s += v * Math.log2(v);
     }
   });
   return -s;
 }
-
-// function runClustering(data, feats, vals) {
-//   // Run One-Hot encoding
-
-//   // Check which features are numeric (0) /categorical (1)
-//   let featTypes = []
-//   vals.forEach((valArr, i) => {
-//     if (isNaN(valArr[0])) {
-//       featTypes.push(1);
-//     } else {
-//       featTypes.push(0);
-//     }
-//   })
-
-//   // One-hot encode
-//   let data_oh = data.slice();
-//   data_oh.forEach(inst => {
-//     featTypes.forEach((type, i) => {
-//       if (type === 1) {
-//         vals[i].forEach(val => {
-//           inst[feats[i] + "-" + val] = 0;
-//           if (inst[feats[i]] === val) {
-//             inst[feats[i] + "-" + val] = 1;
-//           }
-//         })
-//         delete inst[feats[i]]
-//       } else {
-//         inst[feats[i]] = parseFloat(inst[feats[i]])
-//       }
-//     })
-//   })
-
-//   let arrs = data_oh.map(Object.values)
-
-//   //let clusts = skmeans(arrs.slice(100), 50);
-
-// }
 
 /**
  * Given an array of instances with a class, output label, and cluster, returns an array of clusters
@@ -116,17 +78,16 @@ export function getClusters(data, feats, vals) {
   // Get top K defining features and values for each cluster
   let clustDefining = [];
   clustEntropies.forEach((cluster, i) => {
-    let orderedFeats = Object.keys(cluster)
-      .sort((a, b) => {
-        return cluster[a] - cluster[b];
-      })
+    let orderedFeats = Object.keys(cluster).sort((a, b) => {
+      return cluster[a] - cluster[b];
+    });
 
     let clustDistrib = clustDistributions[i];
     let orderedVals = orderedFeats.map(feat => {
       let vals = clustDistrib[feat];
       return Object.keys(vals).reduce((a, b) => (vals[a] < vals[b] ? a : b));
     });
-    
+
     clustDefining[i] = {
       feats: orderedFeats,
       clusterid: i,
