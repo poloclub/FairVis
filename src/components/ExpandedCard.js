@@ -39,7 +39,8 @@ const styles = {
     marginBottom: 10
   },
   hovered: {
-    color: HOVERED_COLOR
+    color: HOVERED_COLOR,
+    paddingRight: 8
   },
   clicked: {
     color: CLICKED_COLOR
@@ -124,8 +125,8 @@ class ExpandedCard extends Component {
       }
       if (this.props.hovered !== -1 && hoveredGroup.feats.includes(feat)) {
         hoveredCell = (
-          <TableCell align={"right"} className={classes.hoveredCell}>
-            {hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}
+          <TableCell align={"right"}>
+            <span class={classes.hoveredCell}>{hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}</span>
           </TableCell>
         );
       }
@@ -178,7 +179,7 @@ class ExpandedCard extends Component {
                   <TableCell align="right">
                     <span className={classes.clicked}>Pinned</span>
                   </TableCell>
-                  <TableCell align="right" className={classes.hoveredCell}>
+                  <TableCell align="right">
                     <span className={classes.hovered}>Hovered</span>
                   </TableCell>
                 </TableRow>
@@ -188,7 +189,7 @@ class ExpandedCard extends Component {
                     {clickedGroup && clickedGroup.metrics.size}
                   </TableCell>
                   <TableCell align="right">
-                    {hoveredGroup && hoveredGroup.metrics.size}
+                    <span className={classes.hoveredCell}>{hoveredGroup && hoveredGroup.metrics.size}</span>
                   </TableCell>
                 </TableRow>
               </TableHead>

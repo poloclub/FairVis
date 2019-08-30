@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-/* Datasets */
+/* Datasets - Add new dataset imports here. */
 import compasData from "../data/compas.csv";
 import adultData from "../data/adult.csv";
 // import censusData from "../data/census.csv";
@@ -140,6 +140,7 @@ class Welcome extends Component {
                 <TableCell align="center">{loadIcon}</TableCell>
               </TableRow>
             </TableHead>
+            {/* Add a new row to this body for a dataset */}
             <TableBody>
               <TableRow>
                 <TableCell component="th" scope="row">
@@ -207,7 +208,7 @@ class Welcome extends Component {
             </TableBody>
           </Table>
         </Paper>
-        <a href="./" className={classes.adddata}>
+        <a href="https://github.com/poloclub/FairVis/blob/master/README.md" className={classes.adddata}>
           <p>Instructions for adding a custom dataset</p>
         </a>
 

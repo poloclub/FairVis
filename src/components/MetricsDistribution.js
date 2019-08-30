@@ -12,14 +12,13 @@ const spec = {
       as: "percent"
     }
   ],
-  spacing: 10,
+  spacing: 5,
   encoding: {
     row: {
       field: "metric",
       type: "ordinal",
-      scale: { padding: 4 },
-      axis: { title: "", orient: "top", axisWidth: 1, offset: -8 },
-      header: {title: ""},
+      scale: { padding: 0 },
+      header: {title: "", labelLimit: 60},
     },
     y: {
       field: "group",

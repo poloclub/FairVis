@@ -18,7 +18,7 @@ import {
   TERTIARY_COLOR
 } from "../util/globals";
 
-import { FaInfoCircle } from "react-icons/fa";
+// import { FaInfoCircle } from "react-icons/fa";
 
 const styles = {
   info: {},
@@ -248,7 +248,7 @@ class FeatureDrawer extends Component {
                   Generate Subgroups
                 </Button>
               </Tooltip>
-              <FaInfoCircle className={classes.info} onClick={() => alert("hello")}/>
+              {/* <FaInfoCircle className={classes.info} onClick={() => alert("hello")}/> */}
             </ListItem>
             <Divider />
 
