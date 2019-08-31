@@ -1,6 +1,10 @@
 # FairVis: Visual Analytics for Discovering Intersectional Bias in Machine Learning
 
-FairVis is a visual analytics system that allows users to audit their classification models for intersectional bias. Users can generate subgroups of their data and investigate if a model is underperforming for certain populations.
+**FairVis** is a visual analytics system that allows users to audit their classification models for intersectional bias. Users can generate subgroups of their data and investigate if a model is underperforming for certain populations.
+
+* Try a **[live demo](https://poloclub.github.io/FairVis/)**!
+* Read the **[full paper](https://arxiv.org/abs/1904.05419)**.
+* **[Cite this work and more](https://cabreraalex.com/#/paper/fairvis)**.
 
 **[FairVis: Visual Analytics for Discovering Intersectional Bias in Machine Learning](https://cabreraalex.com/#/paper/fairvis)**  
 Ángel Alexander Cabrera, Will Epperson, Fred Hohman, Minsuk Kahng, Jamie Morgenstern, Duen Horng (Polo) Chau
