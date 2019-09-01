@@ -21,7 +21,7 @@ const spec = {
       field: "value",
       type: "ordinal",
       axis: { title: "" },
-      sort: { encoding: "x", order: "descending" }
+      sort: { field: "makeup", order: "descending" }
     },
     x: {
       field: "percent",
@@ -63,6 +63,13 @@ class ClusterDistribution extends Component {
         }
       }
     );
+
+    // only take top 3 so labels are visible on plot
+    data = data.sort((a, b) => {
+      return b.makeup - a.makeup;
+    })
+
+    data = data.slice(0, 4)
 
     return (
       <VegaLite

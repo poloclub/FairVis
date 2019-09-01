@@ -269,7 +269,7 @@ class FeatureDrawer extends Component {
                     maxy={this.state.max_ys[feat_i]}
                   />
                   {/* Clicked BoxPlot */}
-                  {/* <BoxPlot
+                  <Histogram
                     featName={feat_name}
                     featIndex={feat_i}
                     clicked={this.props.clicked}
@@ -277,7 +277,7 @@ class FeatureDrawer extends Component {
                     activeGroups={this.props.activeGroups}
                     type={"click"}
                     maxy= {this.state.max_ys[feat_i]}
-                  /> */}
+                  />
                   {/* Hovered BoxPlot */}
                   <Histogram
                     featName={feat_name}

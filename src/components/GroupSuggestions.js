@@ -171,6 +171,7 @@ class GroupSuggestions extends Component {
   render() {
     let classes = this.props.classes;
 
+    // SIMILAR subgroups
     if (this.state.showSimilar && this.state.neighbors.length !== 0 && this.props.clicked !== -1) {
       let clickedGroup = this.props.activeGroups[this.props.clicked];
       let similarGroups = this.state.neighbors
@@ -262,6 +263,7 @@ class GroupSuggestions extends Component {
         </Paper>
       );
     } else {
+      // SUGGESTED subgroups
       // Get least performing subgroups.
       let bottomClusters = this.props.clusters
         .filter(clust => clust.metrics.size > this.props.minSize)

@@ -85,7 +85,7 @@ export function getClusters(data, feats, vals) {
     let clustDistrib = clustDistributions[i];
     let orderedVals = orderedFeats.map(feat => {
       let vals = clustDistrib[feat];
-      return Object.keys(vals).reduce((a, b) => (vals[a] < vals[b] ? a : b));
+      return Object.keys(vals).reduce((a, b) => (vals[a] > vals[b] ? a : b));
     });
 
     clustDefining[i] = {
