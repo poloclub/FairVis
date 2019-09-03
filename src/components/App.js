@@ -27,6 +27,10 @@ import GroupSuggestions from "./GroupSuggestions";
 import MetricSelector from "./MetricSelector";
 import StripPlot from "./StripPlot";
 import Welcome from "./Welcome";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-50459890-3');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const theme = createMuiTheme({
   palette: {
