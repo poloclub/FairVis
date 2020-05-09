@@ -171,7 +171,7 @@ class App extends Component {
       clicked: -1,
 
       // State for selected metrics, by default accuracy, recall, and specificity
-      selectedMetrics: METRICS.slice(0, 7),
+      selectedMetrics: METRICS.slice(5, 7),
 
       minSize: 0,
 
