@@ -21,7 +21,6 @@ import {
 // import { FaInfoCircle } from "react-icons/fa";
 
 const styles = {
-  info: {},
   drawer: {
     width: "20%",
     flexShrink: 0,
@@ -253,9 +252,8 @@ class FeatureDrawer extends Component {
             <Divider />
 
             {this.props.features.map((feat_name, feat_i) => (
-              <>
+              <div key={`section-${feat_i}`}>
                 <ListItem
-                  key={`section-${feat_i}`}
                   className={classes.listItem}
                   onClick={this.handleClick(feat_i)}
                 >
@@ -324,7 +322,7 @@ class FeatureDrawer extends Component {
                     ))}
                 </Collapse>
                 <Divider className={classes.divider} />
-              </>
+              </div>
             ))}
           </List>
         </Drawer>

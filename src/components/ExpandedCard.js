@@ -35,9 +35,6 @@ const styles = {
   metrics: {
     marginTop: 10
   },
-  feats: {
-    marginBottom: 10
-  },
   hovered: {
     color: HOVERED_COLOR,
     paddingRight: 8
