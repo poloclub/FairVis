@@ -45,13 +45,15 @@ But wait for it, in this survey they did convert it to numbers and I added some 
 
 > Finally, respondents were asked about the extent to which they agree with recommendations from the tool and how frequently they use it (Table 5). **Virtually [zero humans] indicated that they “always” or “never” agreed with the PSA recommendation**. Judges (63%) and pretrial staff (72%) were more likely to indicate they agreed with it “often.” Half of defenders and 38% of prosecutors indicated they agree with the recommendation “sometimes.” Nearly one in three prosecutors “rarely” agree with it. This is consistent with earlier results suggesting that judges and pretrial staff saw fewer weaknesses in the DMF than prosecutors and defenders. 
 
-Anyway, so like what if we put a smidge of the things in ([DeMichele et al. 2018](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3168490)) into a tool?  Would the map seem so appealing if it were less abstracted from the territory?
+Anyway, so like what if we put a smidge of the uncertainty from ([DeMichele et al. 2018](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3168490)) into a tool?  Would the map seem so appealing if it were less abstracted from the territory?
 
-Humans don't seem to like this as much ([Pearce 2020](https://pair-code.github.io/interpretability/uncertainty-over-space/)).
+...
 
-Also this paper is about the same topic, but instead of asking humans it asks simulated humans on Mechanical Turk ([Green And Chen](https://scholar.harvard.edu/files/19-fat.pdf)).  But still kind of interesting, like, epistimelogically.
+Humans respond to this differently, and sometimes people have found that "[the humans making the computers] wanted much more information density than [the humans using the computers]" ([Pearce 2020](https://pair-code.github.io/interpretability/uncertainty-over-space/)).
 
-Let's let ML Cummings drop the mic on automation bias, ([2004](https://hal.pratt.duke.edu/sites/hal.pratt.duke.edu/files/u13/Automation%20Bias%20in%20Intelligent%20Time%20Critical%20Decision%20Support%20Systems.pdf)) style:
+Also this paper is also about pretrial detention, but instead of asking humans it asks simulated human computers on Mechanical Turk ([Green And Chen](https://scholar.harvard.edu/files/19-fat.pdf)).  But still kind of interesting, like, epistimelogically.
+
+And here's ML Cummings on automation bias to close us out, ([2004](https://hal.pratt.duke.edu/sites/hal.pratt.duke.edu/files/u13/Automation%20Bias%20in%20Intelligent%20Time%20Critical%20Decision%20Support%20Systems.pdf)) style:
 
 > Automated decision aids are designed to reduce human error but actually can cause new errors in the operation of a system if not designed with human cognitive limitations in mind.
 
