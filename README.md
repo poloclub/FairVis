@@ -1,3 +1,17 @@
+This is a fork! :)  The original work is both: A. awesome and B. double awesome for being shared in the open.  Thanks to @cabreraalex and pals over at https://github.com/poloclub/FairVis :thumbsup
+
+
+It's experimenting with the idea that maybe 10% of the time, the humans don't follow the decision of the prediction model.
+
+So as you're working, the decisions will shift around just that little bit.  You can tune the delay down to intensify the feeling if you like :)
+
+You can also ask how well this toy, with randomness in 10% of binary decisions that individuals are making, appromixates the complexity of the surrounding sociotechnical context.  Or the potential distribution drift in the deployment environment.
+
+Maybe this influences how any patterns you see here are situated within broader questions of sociotechnical fairness.
+
+
+
+---
 # FairVis: Visual Analytics for Discovering Intersectional Bias in Machine Learning
 
 **FairVis** is a visual analytics system that allows users to audit their classification models for intersectional bias. Users can generate subgroups of their data and investigate if a model is underperforming for certain populations.
