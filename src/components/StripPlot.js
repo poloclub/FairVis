@@ -52,10 +52,6 @@ class StripPlot extends Component {
     };
   }
 
-  componentDidMount() {
-    this.createStripPlot();
-  }
-
   createStripPlot = () => {
     const node = this.node;
 
@@ -91,16 +87,14 @@ class StripPlot extends Component {
         .attr("x", -10)
         .attr("y", -10);
     });
-
-    this.update();
   };
 
   update = () => {
     this.props.selectedMetrics.forEach(m => {
       let svg = d3.select(this.node).select("#stripplot-" + m.value);
 
-      svg.selectAll(".percentline").remove();
-
+      // svg.selectAll("line").remove();
+      // svg.selectAll("text").remove();
       svg
         .selectAll(".percentline")
         .data(this.props.activeGroups, d => d.id)
@@ -167,31 +161,30 @@ class StripPlot extends Component {
     });
   };
 
-  shouldComponentUpdate(nextProps, _) {
-    if (nextProps.minSize !== this.props.minSize) {
-      return true;
-    }
-    if (
-      nextProps.selectedMetrics.length !== this.props.selectedMetrics.length
-    ) {
-      return true;
-    }
-    if (nextProps.activeGroups.length === this.props.activeGroups.length) {
-      return false;
-    }
-    return true;
+  // shouldComponentUpdate(nextProps, _) {
+  //   if (nextProps.minSize !== this.props.minSize) {
+  //     return true;
+  //   }
+  //   if (
+  //     nextProps.selectedMetrics.length !== this.props.selectedMetrics.length
+  //   ) {
+  //     return true;
+  //   }
+  //   if (nextProps.activeGroups.length === this.props.activeGroups.length) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+  componentDidMount() {
+    this.createStripPlot();
+    this.update();
   }
-
   componentDidUpdate(prevProps, _) {
-    if (
-      prevProps.selectedMetrics.length !== this.props.selectedMetrics.length
-    ) {
-      this.createStripPlot();
-    }
+    this.createStripPlot();
+    this.update();
   }
 
   render() {
-    this.update();
     return (
       <div
         className={this.props.classes.plot}

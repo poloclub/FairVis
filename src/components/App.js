@@ -1,3 +1,5 @@
+import seedrandom from 'seedrandom';
+import qs from 'query-string';
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import {
@@ -29,8 +31,10 @@ import StripPlot from "./StripPlot";
 import Welcome from "./Welcome";
 import ReactGA from 'react-ga';
 
-ReactGA.initialize('UA-50459890-3');
-ReactGA.pageview(window.location.pathname + window.location.search);
+const humans = loadWithHumans();
+
+// ReactGA.initialize('UA-50459890-3');
+// ReactGA.pageview(window.location.pathname + window.location.search);
 
 const theme = createMuiTheme({
   palette: {
@@ -146,6 +150,9 @@ class App extends Component {
     this.state = {
       // Array of instances with features, label, class output, and cluster
       data: [],
+      noiseStep: 0,
+      fromDisk: null,
+
       // distribution counts of data in same order as features, sorted by value
       dataDistrib: {},
       // Array of clusters from DBSCAN with metrics and value distribution
@@ -164,7 +171,7 @@ class App extends Component {
       clicked: -1,
 
       // State for selected metrics, by default accuracy, recall, and specificity
-      selectedMetrics: METRICS.slice(0, 3),
+      selectedMetrics: METRICS.slice(0, 7),
 
       minSize: 0,
 
@@ -177,24 +184,28 @@ class App extends Component {
   loadData = data => {
     this.setState({ loading: 1 });
 
-    // WebWorker to run preprocessing in parallel.
-    let loaderWorker = new WebWorker(worker);
-
-    loaderWorker.addEventListener("message", r => {
-      let out = r.data;
-      let clusters = getClusters(out.data, out.feats, out.vals);
-      this.setState({
-        data: out.data,
-        dataDistrib: out.distrib,
-        avgs: [out.avgs],
-        features: out.feats,
-        values: out.vals,
-        clusters: clusters,
-        dataLoaded: true,
-        clustersLoaded: true
+    function loop() {
+      stepNoisyData(data, ({out, clusters}) => {
+        this.setState({
+          noiseStep: this.state.noiseStep + 1,
+          data: out.data,
+          dataDistrib: out.distrib,
+          avgs: [out.avgs],
+          features: out.feats,
+          values: out.vals,
+          clusters: clusters,
+          dataLoaded: true,
+          clustersLoaded: true
+          // minSize: Math.round(out.data.length * 0.01), // de-noising heuristic
+        });
+        if (this.state.chosenGroups) {
+          this.createSubgroups(this.state.chosenGroups);
+        }
+        setTimeout(loop.bind(this), humans.config.delay);
       });
-    });
-    d3.csv(data).then(d => loaderWorker.postMessage(d));
+    }
+
+    loop.call(this);
   };
 
   createSubgroups = groups => {
@@ -207,7 +218,8 @@ class App extends Component {
       this.state.values
     );
     this.setState({
-      activeGroups: this.state.activeGroups.concat(subgroups)
+      chosenGroups: groups,
+      activeGroups: subgroups
     });
   };
 
@@ -364,7 +376,12 @@ class App extends Component {
             </Typography>
             <Typography inline variant="h6" className={classes.tagline}>
               {" "}
-              Audit Classification for Intersectional Bias{" "}
+              <span style={{color: 'red'}}>
+                seed={humans.config.seed},
+                p={humans.config.p},
+                delay={humans.config.delay},
+                step={this.state.noiseStep}
+              </span>
             </Typography>
             <Typography variant="body1" color="inherit">
               Minimum Size: {this.state.minSize}
@@ -446,3 +463,46 @@ class App extends Component {
 }
 
 export default withStyles(styles)(App);
+
+
+function noisify(rows) {
+  let randoms = 0;
+  rows.forEach((row, i) => {
+    if (humans.rand() < humans.config.p) {
+      row.out = (humans.rand() > 0.5) ? 1 : 0;
+      randoms += 1;
+    }
+  });
+  console.log('interfering humans:', `${randoms} times, ${Math.round(100*randoms/rows.length)}% of ${rows.length} examples`);
+  
+  return rows;
+}
+
+
+function stepNoisyData(data, done) {
+  // WebWorker to run preprocessing in parallel.
+  let loaderWorker = new WebWorker(worker);
+
+  loaderWorker.addEventListener("message", r => {
+    let out = r.data;
+    let clusters = getClusters(out.data, out.feats, out.vals);
+    done({out, clusters});
+  });
+
+
+  d3.csv(data).then(d => {
+    return loaderWorker.postMessage(noisify(d));
+  });
+}
+
+function loadWithHumans() {
+  const queryString = qs.parse(window.location.search);
+  const config = {
+    p: 0.1,
+    delay: 1000, // ms to wait until changing (after worker)
+    seed: 1000 + Math.floor(8999 * Math.random()),
+    ...queryString
+  };
+  const rand = seedrandom(config.seed);
+  return {config, rand};
+}

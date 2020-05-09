@@ -126,19 +126,17 @@ class ExpandedCard extends Component {
       if (this.props.hovered !== -1 && hoveredGroup.feats.includes(feat)) {
         hoveredCell = (
           <TableCell align={"right"}>
-            <span class={classes.hoveredCell}>{hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}</span>
+            <span className={classes.hoveredCell}>{hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}</span>
           </TableCell>
         );
       }
 
       return (
-        <>
-          <TableRow key={i}>
-            <TableCell className={classes.feat}>{feat}</TableCell>
-            {clickedCell}
-            {hoveredCell}
-          </TableRow>
-        </>
+        <TableRow key={i}>
+          <TableCell className={classes.feat}>{feat}</TableCell>
+          {clickedCell}
+          {hoveredCell}
+        </TableRow>
       );
     });
 

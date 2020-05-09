@@ -253,7 +253,7 @@ class FeatureDrawer extends Component {
             <Divider />
 
             {this.props.features.map((feat_name, feat_i) => (
-              <>
+              <div key={`section-${feat_i}`}>
                 <ListItem
                   key={`section-${feat_i}`}
                   className={classes.listItem}
@@ -324,7 +324,7 @@ class FeatureDrawer extends Component {
                     ))}
                 </Collapse>
                 <Divider className={classes.divider} />
-              </>
+              </div>
             ))}
           </List>
         </Drawer>

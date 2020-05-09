@@ -9,6 +9,7 @@
     "@material-ui/lab": "^3.0.0-alpha.30",
     "d3": "^5.9.1",
     "d3-tip": "^0.9.1",
+    "query-string": "^6.12.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.5",
     "react-ga": "^2.6.0",
@@ -16,6 +17,7 @@
     "react-scripts": "^3.1.1",
     "react-select": "^2.4.2",
     "react-vega-lite": "^2.0.2",
+    "seedrandom": "^3.0.5",
     "typescript": "^3.4.4",
     "vega-lib": "^4.4.0",
     "vega-lite": "^2.6.0"
