@@ -1,5 +1,7 @@
 This is a fork! :)  The original work is both: A. awesome and B. double awesome for being shared in the open.  Thanks to @cabreraalex and pals over at https://github.com/poloclub/FairVis :thumbsup
 
+# rambling notes below, beware
+
 ## what is this
 It's experimenting with the idea that maybe 10% of the time, the humans don't follow the decision of the prediction model.
 
