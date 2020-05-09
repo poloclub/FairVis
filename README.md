@@ -13,15 +13,17 @@ Maybe this influences how any patterns you see here are situated within broader 
 ## if you like research
 Well, you see... human-centered AI ([Vaughan and Wallach 2020](http://www.jennwv.com/papers/intel-chapter.pdf)).
 
-It's hard to design ([Yang et al. 2019](https://dl.acm.org/doi/abs/10.1145/3313831.3376301#.XqgYt7sI0DI.twitter).
-
-But the "existence of visualizations and the fact that the tools were publicly available led to cases of over-trust and misuse" ([Kaur et al. 2020](http://www.jennwv.com/papers/interp-ds.pdf)).
+It's hard to design ([Yang et al. 2019](https://dl.acm.org/doi/abs/10.1145/3313831.3376301#.XqgYt7sI0DI.twitter)).
 
 And those pesky humans "do alter their behavior when the tool is deployed" ([De-Arteaga et al. 2020](https://arxiv.org/pdf/2002.08035.pdf)).
 
-And they are "less likely to adhere to the machine’s recommendation when the score displayed was an incorrect estimate of risk" ([Fogliato et al. 2020])(https://www.dropbox.com/s/kyk1067yk6a6yqp/Lessons_from_the_Deployment_of_an_Algorithmic_Tool_in_Child_Welfare.pdf?dl=0).
+Even the "existence of visualizations and the fact that the tools were publicly available led to cases of over-trust and misuse" ([Kaur et al. 2020](http://www.jennwv.com/papers/interp-ds.pdf)).
+
+And the humans were "less likely to adhere to the machine’s recommendation when the score displayed was an incorrect estimate of risk" ([Fogliato et al. 2020])(https://www.dropbox.com/s/kyk1067yk6a6yqp/Lessons_from_the_Deployment_of_an_Algorithmic_Tool_in_Child_Welfare.pdf?dl=0).
 
 Sometime the humans even talk to each other and develop a "general distrust in the existing system [that] contributes significantly to low comfort in algorithmic decision making" ([Brown et al. 2019](https://www.andrew.cmu.edu/user/achoulde/files/accountability_final_balanced.pdf)).
+
+...
 
 But maybe just maybe none of that applies to pre-trial detention (aka COMPASS if you only speak dataset),  oops it is now 30 seconds later and I ran a search on the internet.  And a lot of people have written about pre-trial detention.
 
