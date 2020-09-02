@@ -335,7 +335,7 @@ class GroupSuggestions extends Component {
               <FormControl>
                 <Select value={this.state.sort} onChange={this.changeSort}>
                   {METRICS.map(m => (
-                    <MenuItem value={m.value}>{m.label}</MenuItem>
+                    <MenuItem key={m.label} value={m.value}>{m.label}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
