@@ -22,7 +22,7 @@ __C.__ Compare selected subgroups and view details.
 
 __D.__ Find suggested underperforming subgroups and similar groups.
 
-For more details about the system and its use cases, see the IEEE VAST paper [here][paper].
+For more details about the system and its use cases, see the [IEEE VAST paper][paper].
 
 ## Installation
 
