@@ -71,12 +71,14 @@ npm start
 
 ## Citation
 ```
-@article{cabrera2019fairvis,
+@inproceedings{cabrera2019fairvis,
   title={FairVis: Visual Analytics for Discovering Intersectional Bias in Machine Learning},
   author={Cabrera, {'A}ngel Alexander and Epperson, Will and Hohman, Fred and Kahng, Minsuk and Morgenstern, Jamie and Chau, Duen Horng},
-  journal={IEEE Conference on Visual Analytics Science and Technology (VAST)},
+  booktitle={2019 IEEE Conference on Visual Analytics Science and Technology (VAST)},
+  pages={46-56},
   year={2019},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi={10.1109/VAST47406.2019.8986948},
   url={https://cabreraalex.com/#/paper/fairvis}
 }
 ```
